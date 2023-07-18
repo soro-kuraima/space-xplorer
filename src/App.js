@@ -1,23 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import Sidebar from './components/Sidebar';
+import Content from './components/Content';
+import { useState } from 'react';
+import APOD from './pages/APOD';
+import EPIC from './pages/EPIC';
+import IMAGE from './pages/IMAGE';
 
 function App() {
+  const [pageIndex, setPageIndex] = useState(0)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App min-h-screen flex flex-start overflow-hidden">
+      <Sidebar setPage={setPageIndex} />
+      <Content>
+        {
+          pageIndex === 0 && <APOD />
+        }
+        {
+          pageIndex === 1 && <EPIC />
+        }
+        {
+          pageIndex === 2 && <IMAGE />
+        }
+      </Content>
     </div>
   );
 }
